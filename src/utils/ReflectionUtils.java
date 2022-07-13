@@ -16,12 +16,10 @@ public class ReflectionUtils {
 
         if (aClass.isAnnotationPresent(Table.class)) {
             Table annotation = aClass.getAnnotation(Table.class);
-            // System.out.println("annotation.value() = " + annotation.value());
             Field[] declaredFields = aClass.getDeclaredFields();
             for (Field field : declaredFields) {
                 if (field.isAnnotationPresent(Column.class)) {
                     Column annotation2 = field.getAnnotation(Column.class);
-                    //System.out.println("annotation2.value() = " + annotation2.value());
                     field.setAccessible(true);
                     Object o = field.get(classes);
                     columnNameToFieldMap.put(annotation2.value(), o);
